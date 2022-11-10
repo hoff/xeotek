@@ -1,0 +1,26 @@
+<h1>App Component</h1>
+
+<svg #chartSvg viewBox="-100 -100 200 200" style="width: 100vw; height: 300px; background: #111;">
+
+  <!-- x axis indicator-->
+  <svg:line x1="-200" x2="200" y1="0" y2="0" stroke="#eee" stroke-width="2"></svg:line>
+
+  <svg:g #barLinesGroup></svg:g>
+
+</svg>
+
+<h2>Polling interval in MS</h2>
+<input #intervalInput 
+  type="range" min="100" max="10000" 
+  [value]="dataService.intervalMs"
+  (change)="dataService.onIntervalChange(+intervalInput.value)"
+  />
+
+<div *ngIf="(dataService.records$ | async) as records">
+
+  <div *ngFor="let record of records">
+    {{ record.data.length }}
+  </div>
+  
+
+</div>
